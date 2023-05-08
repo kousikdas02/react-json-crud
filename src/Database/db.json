@@ -1,0 +1,14 @@
+{
+    "users": [
+      {
+        "name": "Raju kayal",
+        "email": "raju@gmail.com",
+        "phone": "08637000230",
+        "password": "123456788",
+        "city": "kolkata",
+        "state": "West Bengal",
+        "dob": "2023-04-20",
+        "id": 1
+      }
+    ]
+  }
