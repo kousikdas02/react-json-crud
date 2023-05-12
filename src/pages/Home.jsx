@@ -7,8 +7,8 @@ const Home = () => {
       <div className='userTable cmn_gap'>
         <div className="container">
           <div className='table-responsive'>
-            <table class='table'>
-              <thead class='thead-dark'>
+            <table className='table'>
+              <thead className='thead-dark'>
                 <tr>
                   <th scope='col'>#</th>
                   <th scope='col'>Name</th>

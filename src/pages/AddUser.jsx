@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
 const AddUser = () => {
     const initialValues = {
         name: "",
@@ -156,11 +157,11 @@ const AddUser = () => {
 
 
 
-        if (Object.keys(ErrorList).length === 0) {
-            await AddUser(eachUserData)
-            navigate('/')
+        // if (Object.keys(ErrorList).length === 0) {
+        //     await addUser(eachUserData)
+        //     navigate('/')
             
-        }
+        // }
 
 
     }

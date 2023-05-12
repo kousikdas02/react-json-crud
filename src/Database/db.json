@@ -1,12 +1,13 @@
 {
     "users": [
       {
-        "name": "Raju kayal",
-        "email": "raju@gmail.com",
-        "phone": "08637000230",
+        "name": "Kousik Das",
+        "username": "kousikdas02",
+        "email": "kousikdas02@gmail.com",
         "password": "123456788",
         "city": "kolkata",
         "state": "West Bengal",
+        "pin": "712407",
         "dob": "2023-04-20",
         "id": 1
       }
