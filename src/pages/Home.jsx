@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/css/style.css"
+import { deleteUser, getAllUsers } from "../services/API";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [allUsers, setAllUsers] = useState([])
+
+  const allUserData = async () =>{
+    try {
+      const response = await getAllUsers()
+      // console.log(response)
+      setAllUsers(response?.data)
+    } catch (error) {
+      console.log('Error while getting all user data', error);
+    }
+  }
+  useEffect(() => {
+    allUserData()
+  }, [])
+
+  const deleteUserData = async id => {
+    await deleteUser(id)
+    allUserData()
+}
+  // console.log(allUsers);
+  
   return (
     <>
       <div className='userTable cmn_gap'>
@@ -23,7 +46,31 @@ const Home = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                {
+                  allUsers?.map(eachUser => {
+                    return(
+                      <tr key={eachUser.id}>
+                        <th scope="row">{eachUser.id}</th>
+                        <td>{eachUser.name}</td>
+                        <td>{eachUser.username}</td>
+                        <td>{eachUser.email}</td>
+                        <td>{eachUser.password}</td>
+                        <td>{eachUser.city}</td>
+                        <td>{eachUser.state}</td>
+                        <td>{eachUser.pin}</td>
+                        <td>{eachUser.dob}</td>
+                        <td>
+                          <ul>
+                            <li><Link to={`/edit-user/${eachUser.id}`}><button className="btn btn-warning">Edit</button></Link></li>
+                            <li><button className="btn btn-danger" onClick={() => deleteUserData(eachUser.id)}>Delete</button></li>
+                          </ul>
+                        </td>
+                      </tr>
+                    )
+                  })
+                }
+                
+                {/* <tr>
                   <th scope='row'>1</th>
                   <td>Kousik Das</td>
                   <td>kousikdas02</td>
@@ -39,7 +86,7 @@ const Home = () => {
                       <li><button className="btn btn-danger">Delete</button></li>
                     </ul>
                   </td>
-                </tr>
+                </tr> */}
                 
               </tbody>
             </table>

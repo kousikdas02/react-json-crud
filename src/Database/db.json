@@ -1,15 +1,15 @@
 {
-    "users": [
-      {
-        "name": "Kousik Das",
-        "username": "kousikdas02",
-        "email": "kousikdas02@gmail.com",
-        "password": "123456788",
-        "city": "kolkata",
-        "state": "West Bengal",
-        "pin": "712407",
-        "dob": "2023-04-20",
-        "id": 1
-      }
-    ]
-  }
+  "users": [
+    {
+      "name": "Kousik",
+      "username": "Kousik Das",
+      "email": "vdvd@gmail.com",
+      "password": "adsads",
+      "city": "ads",
+      "state": "asd",
+      "pin": "484844848",
+      "dob": "2023-05-13",
+      "id": 1
+    }
+  ]
+}

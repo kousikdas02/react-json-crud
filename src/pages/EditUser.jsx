@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { addUser } from '../services/API'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { editUser, getEachUser } from '../services/API'
 
-
-const AddUser = () => {
+const EditUser = () => {
     const initialValues = {
         name: "",
         username: "",
@@ -17,6 +16,8 @@ const AddUser = () => {
     const navigate = useNavigate()
     const [eachUserData, setEachUserData] = useState(initialValues)
     const [error, setError] = useState({})
+    const {id} = useParams()
+
 
     const validation = () => {
         let error = {}
@@ -159,61 +160,82 @@ const AddUser = () => {
 
 
         if (Object.keys(ErrorList).length === 0) {
-            await addUser(eachUserData)
-            navigate('/')
+            // await editUser(eachUserData)
+            let reg = {
+                name: eachUserData.name,
+                email: eachUserData.email,
+                phone: eachUserData.phone,
+                password: eachUserData.password,
+                city: eachUserData.city,
+                state: eachUserData.state,
+                dob: eachUserData.dob
+            }
+            console.log(reg)
         }
-
 
     }
 
+    const getUserData = async () => {
+        let response = await getEachUser(id)
+        setEachUserData(response.data)
+    }
+
+    useEffect(() => {
+        getUserData()
+    }, [])
+
+    const addUserDetails = async () => {
+        await editUser(eachUserData, id)
+        navigate('/')
+    }
     console.log(error);
-    return (
-        <>
-            <div className="addUser cmn_gap">
+  return (
+    <>
+        <div className="addUser cmn_gap">
                 <div className="container">
                     <div className="addUser_form">
                         <form action="" onSubmit={SubmitInfo}>
                             <div className="form_row row">
                                 <div className="col-lg-6 form_col">
                                     <label htmlFor="">Name</label>
-                                    <input type="text" className="form-control" name='name' placeholder='Enter Name' onChange={e => postUserData(e)}/>
+                                    <input type="text" className="form-control" name='name' onChange={e => postUserData(e)} value={eachUserData.name}/>
                                 </div>
                                 <div className="col-lg-6 form_col">
                                     <label htmlFor="">User Name</label>
-                                    <input type="text" className="form-control" name='username' placeholder='Enter User Name' onChange={e => postUserData(e)}/>
+                                    <input type="text" className="form-control" name='username' onChange={e => postUserData(e)} value={eachUserData.username}/>
                                 </div>
                                 <div className="col-lg-6 form_col">
                                     <label htmlFor="">Email</label>
-                                    <input type="text" className="form-control" name='email' placeholder='Enter Email' onChange={e => postUserData(e)}/>
+                                    <input type="text" className="form-control" name='email' onChange={e => postUserData(e)} value={eachUserData.email}/>
                                 </div>
                                 <div className="col-lg-6 form_col">
                                     <label htmlFor="">Password</label>
-                                    <input type="password" className="form-control" name='password' placeholder='Enter Password' onChange={e => postUserData(e)}/>
+                                    <input type="password" className="form-control" name='password' onChange={e => postUserData(e)} value={eachUserData.password}/>
                                 </div>
                                 <div className="col-lg-6 form_col">
                                     <label htmlFor="">City</label>
-                                    <input type="text" className="form-control" name='city' placeholder='Enter City' onChange={e => postUserData(e)}/>
+                                    <input type="text" className="form-control" name='city' onChange={e => postUserData(e)} value={eachUserData.city}/>
                                 </div>
                                 <div className="col-lg-6 form_col">
                                     <label htmlFor="">State</label>
-                                    <input type="text" className="form-control" name='state' placeholder='Enter State' onChange={e => postUserData(e)}/>
+                                    <input type="text" className="form-control" name='state' onChange={e => postUserData(e)} value={eachUserData.state}/>
                                 </div>
                                 <div className="col-lg-6 form_col">
                                     <label htmlFor="">Pin Code</label>
-                                    <input type="number" className="form-control" name='pin' placeholder='Enter Pin Code' onChange={e => postUserData(e)}/>
+                                    <input type="number" className="form-control" name='pin' onChange={e => postUserData(e)} value={eachUserData.pin}/>
                                 </div>
                                 <div className="col-lg-6 form_col">
                                     <label htmlFor="">Date of Birth</label>
-                                    <input type="date" className="form-control" name='dob' placeholder='Enter Date of Birth' onChange={e => postUserData(e)}/>
+                                    <input type="date" className="form-control" name='dob' onChange={e => postUserData(e)} value={eachUserData.dob}/>
                                 </div>
                             </div>
-                            <button type="submit" className='btn btn-success'>Submit</button>
+                            <button type="submit" className='btn btn-success' onClick={addUserDetails}>Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </>
-    )
+    </>
+  )
 }
 
-export default AddUser
+export default EditUser

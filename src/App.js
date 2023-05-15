@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Header from './components/common/header/Header'
 import Footer from './components/common/footer/Footer'
 import AddUser from './pages/AddUser';
+import EditUser from './pages/EditUser';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/add-user' element={<AddUser />} />
+          <Route path='/edit-user/:id' element={<EditUser/> }/>
         </Routes>
         <Footer />
       </Router>
